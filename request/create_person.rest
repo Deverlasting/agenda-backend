@@ -28,3 +28,36 @@ content-type: application/json
     "name": "",
     "number": "666 666 666"
 }
+
+###
+
+GET https://agenda-backend-5a29.onrender.com/api/persons
+
+###
+POST https://agenda-backend-5a29.onrender.com/api/persons HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
+POST https://agenda-backend-5a29.onrender.com/api/persons HTTP/1.1
+content-type: application/json
+
+{
+    "id":"",
+    "name": "a",
+    "number": "666 666 666"
+}
+###
+POST https://agenda-backend-5a29.onrender.com/api/persons HTTP/1.1
+content-type: application/json
+
+{
+    "id":"",
+    "name": "",
+    "number": "666 666 666"
+}

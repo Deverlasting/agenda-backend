@@ -31,6 +31,7 @@ let persons = [
     }
 ]
 
+app.use(express.static('dist'))
 
 morgan.token('postData', function (req, res) {
     if (req.method === 'POST') {
