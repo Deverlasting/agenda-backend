@@ -44,9 +44,9 @@ morgan.token('postData', function (req, res) {
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms - Data: :postData'));
 
 
-// const unknownEndpoint = (request, response) => {
-//     response.status(404).send({ error: 'unknown endpoint' })
-// }
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unkn0wn endpoint' })
+}
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
@@ -109,8 +109,13 @@ app.post('/api/persons', (request, response) => {
 })
 
 
-// app.use(unknownEndpoint)
+app.use(unknownEndpoint)
 
-const PORT = 3001
-app.listen(PORT)
-console.log(`Server running on port ${PORT}`)
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})
+
+// const PORT = 3001
+// app.listen(PORT)
+// console.log(`Server running on port ${PORT}`)
