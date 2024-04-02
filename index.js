@@ -18,7 +18,7 @@ const url =
     `mongodb+srv://srquitanieves:${password}@cluster0.jleqeb0.mongodb.net/agenda?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery', false)
-mongoose.connect(url)
+// mongoose.connect(url)
 
 const personSchema = new mongoose.Schema({
     id: Number,
