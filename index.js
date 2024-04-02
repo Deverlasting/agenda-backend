@@ -1,12 +1,33 @@
 
+require('dotenv').config()
 const express = require('express')
 const app = express()
+const Person = require('./models/person')
 const morgan = require('morgan')
 app.use(express.json())
 const cors = require('cors')
-// app.use(morganMiddleware)
-
 app.use(cors())
+
+
+const mongoose = require('mongoose')
+
+const password = process.argv[2]
+
+// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
+const url =
+    `mongodb+srv://srquitanieves:${password}@cluster0.jleqeb0.mongodb.net/agenda?retryWrites=true&w=majority`
+
+mongoose.set('strictQuery', false)
+mongoose.connect(url)
+
+const personSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    number: String,
+})
+
+// const Person = mongoose.model('Person', personSchema)
+
 
 let persons = [
     {
@@ -49,8 +70,16 @@ const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unkn0wn endpoint' })
 }
 
+// Data obtained from local
+// app.get('/api/persons', (request, response) => {
+//     response.json(persons)
+// })
+
+// Data obtained from DB
 app.get('/api/persons', (request, response) => {
-    response.json(persons)
+    Person.find({}).then(persons => {
+        response.json(persons)
+    })
 })
 
 app.get('/info', (request, response) => {
@@ -83,6 +112,7 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(204).end()
 })
 
+// add new person
 app.post('/api/persons', (request, response) => {
     const person = request.body
     const id = Math.floor(Math.random() * 1000);
