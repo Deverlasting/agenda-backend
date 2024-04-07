@@ -16,7 +16,7 @@ content-type: application/json
 
 {
     "id":"",
-    "name": "a",
+    "name": "cb",
     "number": "666 666 666"
 }
 ###

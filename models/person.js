@@ -18,9 +18,22 @@ mongoose.connect(url)
     })
 
 const personSchema = new mongoose.Schema({
-    id: Number,
-    name: String,
-    number: String,
+    // id: Number,
+    name: {
+        type: String,
+        minLength: 3,
+        required: true
+    },
+    number: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (v) {
+                return /^\d{2,3}-\d{7}$/.test(v);
+            },
+            message: props => `${props.value} Incorrect format. Should be XX-XXXXXXX o XXX-XXXXXXX.`
+        }
+    }
 })
 
 // avoid to show _id and __v field, showing only id,name and number
